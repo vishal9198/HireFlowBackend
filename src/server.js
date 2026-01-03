@@ -52,7 +52,8 @@ if (ENV.NODE_ENV === "production") {
   //create a single server for both frontend and backend used when both deployaing on same server(sevalla) if front end and backend are deployed on different servers(frontend on vercel and backend on railway,render) then this is not required (so keep node_env as development in that case)
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.get("/{*any}", (req, res) => {
+  // serve index.html for all other routes so client-side routing works
+  app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
