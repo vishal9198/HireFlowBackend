@@ -47,6 +47,7 @@ app.get("/books", (req, res) => {
 });
 
 //make our app ready for deployment if fromtend and backend are deployed on same deployment platform
+/*
 
 if (ENV.NODE_ENV === "production") {
   //create a single server for both frontend and backend used when both deployaing on same server(sevalla) if front end and backend are deployed on different servers(frontend on vercel and backend on railway,render) then this is not required (so keep node_env as development in that case)
@@ -57,6 +58,13 @@ if (ENV.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
+  */
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "HireFlow Backend API is running 🚀",
+  });
+});
 
 const startServer = async () => {
   try {
