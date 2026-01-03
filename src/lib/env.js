@@ -13,5 +13,5 @@ export const ENV = {
   CLERK_PUBLISHABLE_KEY: process.env.CLERK_PUBLISHABLE_KEY,
   CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
   // set SERVE_CLIENT=true when you want the backend to serve frontend static files
-  SERVE_CLIENT: process.env.SERVE_CLIENT,
+  // SERVE_CLIENT: process.env.SERVE_CLIENT,
 };
