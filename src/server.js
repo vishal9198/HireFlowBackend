@@ -48,13 +48,17 @@ app.get("/books", (req, res) => {
 
 //make our app ready for deployment if fromtend and backend are deployed on same deployment platform
 
-if (ENV.NODE_ENV === "production") {
-  //create a single server for both frontend and backend used when both deployaing on same server(sevalla) if front end and backend are deployed on different servers(frontend on vercel and backend on railway,render) then this is not required (so keep node_env as development in that case)
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-  // serve index.html for all other routes so client-side routing works
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+const clientDistPath = path.join(__dirname, "../frontend/dist");
+if (ENV.SERVE_CLIENT === "true" && fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+  // catch-all to serve index.html for client-side routes
+  app.get("/*", (req, res) => {
+    res.sendFile(path.join(clientDistPath, "index.html"));
+  });
+} else {
+  // don't serve frontend here (frontend hosted separately). Provide a simple root response to avoid 404s at '/'
+  app.get("/", (req, res) => {
+    res.status(200).json({ msg: "HireFlow backend API is running" });
   });
 }
 
