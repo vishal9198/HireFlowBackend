@@ -19,6 +19,12 @@ app.use(express.json());
 // origin is front end url where our front end is hosted
 
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     credentials: true,
+//   })
+// );
 
 app.use(clerkMiddleware()); //this adds auth field to req object//you can call req.auth to get auth info about user
 
