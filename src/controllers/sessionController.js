@@ -14,9 +14,7 @@ export async function createSession(req, res) {
     }
 
     // generate a unique call id for stream video
-    const callId = `session_${Date.now()}_${Math.random()
-      .toString(36)
-      .substring(7)}`;
+    const callId = `session_${Date.now()}_${Math.random().toString(36).substring(7)}`;
 
     // create session in db
     const session = await Session.create({
